@@ -1,4 +1,7 @@
 
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).parent.parent))
 from fastapi import FastAPI
 from app.ABB.controller.tree_controller import router as tree_router
 

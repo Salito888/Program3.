@@ -1,7 +1,8 @@
 
 from typing import Dict, List, Optional, Any
-from ..model.tree_model import ABB, Child, NodoABB
-from pydantic import Basemodel
+from model.tree_model import ABB, Child, NodoABB
+from collections import defaultdict
+
 
 class TreeService:
     """
@@ -10,7 +11,7 @@ class TreeService:
     def __init__(self):
         self.tree = ABB()
     
-    def insert_child(self, id: int, name: str, age: int) -> Dict[str, Any]:
+    def insert_child(self, id: int, name: str, age: int, city: str, gender: str) -> Dict[str, Any]:
         """
         Inserta un nuevo niño en el árbol.
         
@@ -31,16 +32,16 @@ class TreeService:
                 }
             
             # Crear y agregar el nuevo niño
-            new_child = Child((101, "María García", 7), 
-            (70, "Juan Pérez", 6),
-            (6, "Ana López", 8),
-            (-2, "Carlos Sánchez", 7),
-            (100, "Laura Torres", 9),
-            (90, "Pedro Ramírez", 6),
-            (30, "Sofía Díaz", 8),
-            (46, "Diego Castro", 7),
-            (99, "Elena Ruiz", 9),
-            (33, "Miguel Ángel Soto", 8))
+            new_child = Child((101, "María García", 7, "Cali", "Female"), 
+            (70, "Juan Pérez", 6, "Manizales", "Male"),
+            (6, "Ana López", 8, "Manizales", "Female"),
+            (-2, "Carlos Sánchez", 7, "Cali", "Male"),
+            (100, "Laura Torres", 9, "Medellín", "Female"),
+            (90, "Pedro Ramírez", 6, "Bogotá", "Male"),
+            (30, "Sofía Díaz", 8, "Pereira", "Female"),
+            (46, "Diego Castro", 7, "Pereira", "Male"),
+            (99, "Elena Ruiz", 9, "Pereira", "Female"),
+            (33, "Miguel Ángel Soto", 8, "Manizales", "Male"))
             self.tree.insert(new_child)
             
             return {
@@ -85,6 +86,8 @@ class TreeService:
                 "success": False,
                 "message": f"Error al buscar el niño: {str(e)}"
             }
+
+    
     
     def get_tree(self) -> Dict[str, Any]:
         """
@@ -143,4 +146,58 @@ class TreeService:
                 "success": False,
                 "message": f"Error al limpiar el árbol: {str(e)}"
             }
+
+
+    def get_kids_by_city_and_gender(self) -> Dict[str, Any]:
+      """
+      Genera un informe de cantidad de niños por ciudad y género.
+      """
+    try:
+        data = defaultdict(lambda: {"female": 0, "male": 0})
+
+        def traverse(node: Optional[NodoABB]):
+            if node:
+                child = node.child
+                if child.city and child.gender:
+                    gender = child.gender.lower()
+                    if gender in ("female", "male"):
+                        data[child.city][gender] += 1
+                traverse(node.left)
+                traverse(node.right)
+
+        traverse(self.tree.root)
+
+        # Tabla de reportes
+        report = []
+        for city, counts in data.items():
+            total_city = counts["female"] + counts["male"]
+            report.append({
+                "City": city,
+                "Gender": {
+                    "female": counts["female"],
+                    "male": counts["male"]
+                },
+                "Cant": total_city
+            })
+
+        # Totales generales
+        total_female = sum(c["Gender"]["female"] for c in report)
+        total_male = sum(c["Gender"]["male"] for c in report)
+        total = total_female + total_male
+        
+        return {
+            "success": True,
+            "Report": report,
+            "Totals": {
+                "female": total_female,
+                "male": total_male,
+                "total": total
+            }
+        }
+        except Exception as e:
+            return {
+            "success": False,
+            "message": f"Error al generar el informe: {str(e)}"
+        }
+
             

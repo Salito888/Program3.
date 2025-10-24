@@ -1,13 +1,18 @@
 from typing import Optional, Dict, Any
+from pydantic import BaseModel
 
-class Child:
+
+class Child(BaseModel):
     """
     Class representing a child's information.
     """
-    def __init__(self, id: int, name: str, age: int):
+    def __init__(self, id: int, name: str, age: int, city: str, gender: str):
         self.id = id
         self.name = name
         self.age = age
+        self.city = city
+        self.gender = gender
+        
     
     def to_dict(self) -> Dict[str, Any]:
         """Converts the Child object to a dictionary."""

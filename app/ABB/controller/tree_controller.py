@@ -24,6 +24,16 @@ async def add_child(id: int, name: str, age: int):
         raise HTTPException(status_code=400, detail=result["message"])
     return result
 
+@router.get("/kidsbycityandgender", response_model=Dict[str, Any])
+async def get_kids_by_city_and_gender():
+
+    """
+    Genera informe de cantidad de niños por ciudad y por género
+
+    """
+    return tree_service.get_kids_by_city_and_gender()
+    
+
 @router.get("/child/{child_id}", response_model=Dict[str, Any])
 async def get_child(child_id: int):
     """

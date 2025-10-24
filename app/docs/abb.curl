@@ -1,0 +1,41 @@
+
+
+# 🌳 API Árbol Binario de Búsqueda (ABB)
+# Autor@: Salomé Granada Henao
+# Descripción: Comandos curl para probar la API del ABB en localhost:8000
+# -----------------------------------------------------------------------------
+# Endpoints disponibles:
+#   POST   /api/v1/child/           → Agregar un nuevo nodo (niño)
+#   GET    /api/v1/child/{id}       → Obtener un niño por su ID
+#   GET    /api/v1/tree/            → Obtener la estructura completa del ABB
+#   GET    /api/v1/tree/balance/    → Verificar si el ABB está balanceado
+#   GET    /api/v1/kidsbycityandgender    → Generar informe por City y Gender
+#   DELETE /api/v1/tree/            → Eliminar todos los nodos del ABB
+
+
+# 🟩 1️⃣ Agregar niños al ABB
+curl -X POST "http://localhost:8000/api/v1/child/?id=101&name=María%20García&age=7"
+curl -X POST "http://localhost:8000/api/v1/child/?id=70&name=Juan%20Pérez&age=6"
+curl -X POST "http://localhost:8000/api/v1/child/?id=6&name=Ana%20López&age=8"
+curl -X POST "http://localhost:8000/api/v1/child/?id=-2&name=Carlos%20Sánchez&age=7"
+curl -X POST "http://localhost:8000/api/v1/child/?id=100&name=Laura%20Torres&age=9"
+curl -X POST "http://localhost:8000/api/v1/child/?id=90&name=Pedro%20Ramírez&age=6"
+curl -X POST "http://localhost:8000/api/v1/child/?id=30&name=Sofía%20Díaz&age=8"
+curl -X POST "http://localhost:8000/api/v1/child/?id=46&name=Diego%20Castro&age=7"
+curl -X POST "http://localhost:8000/api/v1/child/?id=99&name=Elena%20Ruiz&age=9"
+curl -X POST "http://localhost:8000/api/v1/child/?id=33&name=Miguel%20Ángel%20Soto&age=8"
+
+# 🔍 2️⃣ Obtener la información de un niño específico
+curl -X GET "http://localhost:8000/api/v1/child/46"
+
+# 🌳 3️⃣ Obtener la estructura completa del árbol ABB
+curl -X GET "http://localhost:8000/api/v1/tree/"
+
+# ⚖️ 4️⃣ Verificar si el ABB está balanceado
+curl -X GET "http://localhost:8000/api/v1/tree/balance/"
+
+# 📊 5️⃣ Generar informe de cantidad de niños por City y Gender
+curl -X GET "http://localhost:8000/api/v1/kidsbycityandgender"
+
+# 🗑️ 6️⃣ Limpiar completamente el árbol ABB
+curl -X DELETE "http://localhost:8000/api/v1/tree/"

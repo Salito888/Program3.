@@ -1,0 +1,154 @@
+
+{
+  "info": {
+    "name": "API Árbol ABB",
+    "_postman_id": "abb-collection-salome",
+    "description": "Colección de solicitudes para probar el Árbol Binario de Búsqueda (ABB) en FastAPI.\nIncluye inserción, consulta, estructura, verificación de balance, limpieza del árbol y reporte por ciudad y género.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1️⃣ Agregar niños al ABB",
+      "item": [
+        {
+          "name": "Agregar María García",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:8000/api/v1/child/?id=101&name=María%20García&age=7",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "child", ""],
+              "query": [
+                { "key": "id", "value": "101" },
+                { "key": "name", "value": "María García" },
+                { "key": "age", "value": "7" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Agregar Juan Pérez",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8000/api/v1/child/?id=70&name=Juan%20Pérez&age=6"
+          }
+        },
+        {
+          "name": "Agregar Ana López",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8000/api/v1/child/?id=6&name=Ana%20López&age=8"
+          }
+        },
+        {
+          "name": "Agregar Carlos Sánchez",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8000/api/v1/child/?id=-2&name=Carlos%20Sánchez&age=7"
+          }
+        },
+        {
+          "name": "Agregar Laura Torres",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8000/api/v1/child/?id=100&name=Laura%20Torres&age=9"
+          }
+        },
+        {
+          "name": "Agregar Pedro Ramírez",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8000/api/v1/child/?id=90&name=Pedro%20Ramírez&age=6"
+          }
+        },
+        {
+          "name": "Agregar Sofía Díaz",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8000/api/v1/child/?id=30&name=Sofía%20Díaz&age=8"
+          }
+        },
+        {
+          "name": "Agregar Diego Castro",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8000/api/v1/child/?id=46&name=Diego%20Castro&age=7"
+          }
+        },
+        {
+          "name": "Agregar Elena Ruiz",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8000/api/v1/child/?id=99&name=Elena%20Ruiz&age=9"
+          }
+        },
+        {
+          "name": "Agregar Miguel Ángel Soto",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8000/api/v1/child/?id=33&name=Miguel%20Ángel%20Soto&age=8"
+          }
+        }
+      ]
+    },
+    {
+      "name": "2️⃣ Obtener niño por ID",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8000/api/v1/child/46"
+      }
+    },
+    {
+      "name": "3️⃣ Obtener estructura completa del ABB",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8000/api/v1/tree/"
+      }
+    },
+    {
+      "name": "4️⃣ Verificar si el ABB está balanceado",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8000/api/v1/tree/balance/"
+      }
+    },
+    {
+      "name": "5️⃣ Limpiar el árbol ABB",
+      "request": {
+        "method": "DELETE",
+        "url": "http://localhost:8000/api/v1/tree/"
+      }
+    },
+    {
+      "name": "6️⃣ Reporte: Cantidad de niños por ciudad y género",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8000/api/v1/kidsbycityandgender"
+      },
+      "response": [
+        {
+          "name": "Ejemplo de respuesta",
+          "originalRequest": {
+            "method": "GET",
+            "url": "http://localhost:8000/api/v1/kidsbycityandgender"
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": true,\n  \"Report\": [\n    {\n      \"City\": \"Bogotá\",\n      \"Gender\": {\n        \"female\": 3,\n        \"male\": 2\n      },\n      \"Cant\": 5\n    },\n    {\n      \"City\": \"Medellín\",\n      \"Gender\": {\n        \"female\": 2,\n        \"male\": 3\n      },\n      \"Cant\": 5\n    },\n    {\n      \"City\": \"Cali\",\n      \"Gender\": {\n        \"female\": 1,\n        \"male\": 1\n      },\n      \"Cant\": 2\n    }\n  ],\n  \"Totals\": {\n    \"female\": 6,\n    \"male\": 6,\n    \"total\": 12\n  }\n}"
+        }
+      ]
+    }
+  ]
+}
+
+  
+

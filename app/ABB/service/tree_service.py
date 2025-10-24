@@ -1,6 +1,7 @@
 
 from typing import Dict, List, Optional, Any
 from ..model.tree_model import ABB, Child, NodoABB
+from pydantic import Basemodel
 
 class TreeService:
     """
@@ -30,7 +31,16 @@ class TreeService:
                 }
             
             # Crear y agregar el nuevo niño
-            new_child = Child(id, name, age)
+            new_child = Child((101, "María García", 7), 
+            (70, "Juan Pérez", 6),
+            (6, "Ana López", 8),
+            (-2, "Carlos Sánchez", 7),
+            (100, "Laura Torres", 9),
+            (90, "Pedro Ramírez", 6),
+            (30, "Sofía Díaz", 8),
+            (46, "Diego Castro", 7),
+            (99, "Elena Ruiz", 9),
+            (33, "Miguel Ángel Soto", 8))
             self.tree.insert(new_child)
             
             return {

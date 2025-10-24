@@ -126,3 +126,4 @@ class ABB:
     def clear(self) -> None:
         """Clears the tree, removing all nodes."""
         self.root = None
+        

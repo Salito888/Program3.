@@ -6,7 +6,7 @@ from ..service.tree_service import TreeService
 router = APIRouter()
 tree_service = TreeService()
 
-@router.post("/children/", response_model=Dict[str, Any])
+@router.post("/child/", response_model=Dict[str, Any])
 async def add_child(id: int, name: str, age: int):
     """
     Añade un nuevo niño al árbol.
@@ -24,7 +24,7 @@ async def add_child(id: int, name: str, age: int):
         raise HTTPException(status_code=400, detail=result["message"])
     return result
 
-@router.get("/children/{child_id}", response_model=Dict[str, Any])
+@router.get("/child/{child_id}", response_model=Dict[str, Any])
 async def get_child(child_id: int):
     """
     Obtiene la información de un niño por su ID.

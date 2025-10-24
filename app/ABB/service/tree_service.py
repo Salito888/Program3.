@@ -149,13 +149,13 @@ class TreeService:
 
 
     def get_kids_by_city_and_gender(self) -> Dict[str, Any]:
-      """
-      Genera un informe de cantidad de niños por ciudad y género.
-      """
-    try:
-        data = defaultdict(lambda: {"female": 0, "male": 0})
+       """
+       Genera un informe de cantidad de niños por ciudad y género.
+       """
+       try:
+           data = defaultdict(lambda: {"female": 0, "male": 0})
 
-        def traverse(node: Optional[NodoABB]):
+    def traverse(node: Optional[NodoABB]):
             if node:
                 child = node.child
                 if child.city and child.gender:
@@ -164,8 +164,7 @@ class TreeService:
                         data[child.city][gender] += 1
                 traverse(node.left)
                 traverse(node.right)
-
-        traverse(self.tree.root)
+                traverse(self.tree.root)
 
         # Tabla de reportes
         report = []
